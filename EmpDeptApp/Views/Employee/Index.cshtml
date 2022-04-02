@@ -1,0 +1,51 @@
+﻿@model IEnumerable<EmpDeptApp.Models.EmpDeptViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+l
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptName)
+            </th>  
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>             
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                 <img src="~/images/@item.ImagePath"   
+                         class="rounded-circle"   
+                         height="40" width="40"   
+                         asp-append-version="true" />  
+                    @item.Name  
+               @* @Html.DisplayFor(modelItem => item.Name)*@
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.DeptName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+                      
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.EmpId  }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.EmpId }, new{onclick="return confirm('Are you sure to delete?')" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,78 @@
+﻿@model EmpDeptApp.Models.EmployeeViewModel
+
+@{
+   ViewData["Title"] = Model !=null ? "Edit" : "Create";
+}
+
+<h1>@ViewData["Title"] Employee</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="@ViewData["Title"]" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @* <input  type="hidden" asp-for="EmpId" />
+
+            <div class="form-group">
+                <label asp-for="EmpId" class="control-label"></label>
+                <input asp-for="EmpId" class="form-control" />
+                <span asp-validation-for="EmpId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeptId" class="control-label"></label>
+                 <select asp-for="DeptId" class="form-control" asp-items=@(new SelectList(ViewBag.Departments,"DeptId","Name"))>
+                <option value="">--Select--</option>
+                </select>
+                <span asp-validation-for="DeptId" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                @* <div class="custom-file">
+                <label asp-for="ImagePath" class="control-label"></label>
+                <input asp-for="ImagePath" class="custom-file-input" id="customfile" />
+                <label class-"custom-file-label" for="customfile"></label>
+                </div>*@
+               <label asp-for="ImageEmp" class="control-label"></label>
+                <div class="custom-file mb-3">               
+                  <input asp-for="ImageEmp" class="custom-file-input"  accept="image/*" id="customFile">
+                  <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+              
+                <span asp-validation-for="ImageEmp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                 <a asp-action="Index" asp-controller="Employee" class="btn btn-warning" >Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@*@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+*@
+
+@section scripts{  
+    <script type="text/javascript">  
+        // Add the following code if you want the name of the file appear on select  
+        $(".custom-file-input").on("change", function () {  
+            var fileName = $(this).val().split("\\").pop();  
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);  
+        });  
+    </script>
+}
